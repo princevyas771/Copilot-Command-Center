@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copilot Command Center</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <div>
+          <h1>Copilot Command Center</h1>
+          <p>Developer Toolkit</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-link active" data-section="dashboard">Dashboard</button>
+        <button class="nav-link" data-section="terminal">Command Center</button>
+        <button class="nav-link" data-section="tools">Tools</button>
+        <button class="nav-link" data-section="history">History</button>
+        <button class="nav-link" data-section="favorites">Favorites</button>
+      </nav>
+      <button id="themeToggle" class="ghost-btn">Toggle Theme</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <button id="mobileMenuBtn" class="ghost-btn">☰</button>
+        <h2 id="sectionTitle">Dashboard</h2>
+      </header>
+
+      <section class="section active" id="dashboard">
+        <div class="stats-grid">
+          <article class="stat-card">
+            <h3>Total Commands</h3>
+            <p id="statTotalCommands">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>History Entries</h3>
+            <p id="statHistory">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>Favorites</h3>
+            <p id="statFavorites">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>Current Theme</h3>
+            <p id="statTheme">Dark</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="terminal">
+        <div class="panel">
+          <h3>Terminal Command Center</h3>
+          <p class="muted">Use natural language commands. Try: <code>format json {"name":"Copilot"}</code></p>
+          <div class="terminal">
+            <div id="terminalOutput" class="terminal-output"></div>
+            <div class="terminal-input-row">
+              <input id="terminalInput" type="text" placeholder="Enter command..." autocomplete="off" />
+              <button id="runCommandBtn">Run</button>
+              <button id="favCommandBtn" class="ghost-btn">Favorite</button>
+              <button id="clearTerminalBtn" class="ghost-btn">Clear</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tools">
+        <div class="tool-grid">
+          <article class="panel tool-card">
+            <h3>JSON Formatter</h3>
+            <textarea id="jsonInput" placeholder='{"hello":"world"}'></textarea>
+            <div class="actions">
+              <button id="jsonFormatBtn">Format JSON</button>
+              <button id="jsonCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="jsonOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>Base64 Encoder / Decoder</h3>
+            <textarea id="base64Input" placeholder="Enter text or Base64..."></textarea>
+            <div class="actions">
+              <button id="base64EncodeBtn">Encode</button>
+              <button id="base64DecodeBtn">Decode</button>
+              <button id="base64CopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="base64Output" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>UUID Generator</h3>
+            <div class="actions">
+              <button id="uuidGenerateBtn">Generate UUID</button>
+              <button id="uuidCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="uuidOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>Password Generator</h3>
+            <input id="passwordLength" type="number" min="8" max="128" value="16" />
+            <div class="actions">
+              <button id="passwordGenerateBtn">Generate Password</button>
+              <button id="passwordCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="passwordOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>Timestamp Converter</h3>
+            <input id="timestampInput" type="text" placeholder="Unix timestamp or date string" />
+            <div class="actions">
+              <button id="timestampConvertBtn">Convert</button>
+              <button id="timestampNowBtn" class="ghost-btn">Now</button>
+              <button id="timestampCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="timestampOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>README Generator</h3>
+            <input id="readmeProjectName" type="text" placeholder="Project name" />
+            <textarea id="readmeDescription" placeholder="Project description"></textarea>
+            <div class="actions">
+              <button id="readmeGenerateBtn">Generate README</button>
+              <button id="readmeCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="readmeOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>Git Commit Message Generator</h3>
+            <textarea id="commitInput" placeholder="Describe your changes..."></textarea>
+            <div class="actions">
+              <button id="commitGenerateBtn">Generate Message</button>
+              <button id="commitCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="commitOutput" class="tool-output"></pre>
+          </article>
+
+          <article class="panel tool-card">
+            <h3>Code Explainer</h3>
+            <textarea id="codeInput" placeholder="Paste code..."></textarea>
+            <div class="actions">
+              <button id="codeExplainBtn">Explain Code</button>
+              <button id="codeCopyBtn" class="ghost-btn">Copy</button>
+            </div>
+            <pre id="codeOutput" class="tool-output"></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="history">
+        <div class="panel">
+          <h3>Command History</h3>
+          <ul id="historyList" class="list"></ul>
+        </div>
+      </section>
+
+      <section class="section" id="favorites">
+        <div class="panel">
+          <h3>Favorite Commands</h3>
+          <ul id="favoritesList" class="list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
